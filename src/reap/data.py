@@ -422,6 +422,15 @@ class WritingPromptsChatDataset(ChatDatasetProcessor):
         }
 
 
+class RPWritingPromptsChatDataset(ChatDatasetProcessor):
+    """Dataset for WritingPrompts_curated."""
+
+    category_field: str = None
+
+    @staticmethod
+    def _map_fn(sample: dict[str, any]) -> dict[str, any]:
+        return sample
+
 
 DATASET_REGISTRY: dict[str, BaseDatasetProcessor] = {
     "m-a-p/CodeFeedback-Filtered-Instruction": CodeFeedbackChatDataset,
@@ -432,4 +441,5 @@ DATASET_REGISTRY: dict[str, BaseDatasetProcessor] = {
     "theblackcat102/evol-codealpaca-v1": CodeAlpacaChatDataset,
     "euclaise/WritingPrompts_curated": WritingPromptsChatDataset,
     "allenai/tulu-3-sft-personas-math": PersonasMathChatDataset,
+    "marcoeverai/rp": RPWritingPromptsChatDataset
 }
