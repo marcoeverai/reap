@@ -31,7 +31,7 @@ echo "Evaluations: lm_eval: $run_lm_eval, evalplus: $run_evalplus, livecodebench
 echo "Using seed: $seed"
 
 echo "Running with model: $model_name, dataset: $dataset_name, compression ratio: $compression_ratio, pruning method: $pruning_method"
-python src/reap/prune.py \
+python3 src/reap/prune.py \
     --model-name $model_name \
     --dataset-name $dataset_name \
     --compression-ratio $compression_ratio \
