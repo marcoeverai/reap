@@ -22,6 +22,7 @@ dependencies = [
     "umap-learn>=0.5.7",
     "vllm==0.10.0",
     "livecodebench",
+    "huggingface_hub",
     "deepspeed>=0.17.4",
     "trl>=0.21.0",
     "hatchling>=1.27.0",

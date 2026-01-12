@@ -61,18 +61,6 @@ pruned_model_dir_name="${pruned_model_dir_name}-seed_${seed}-${compression_ratio
 
 model_dir="artifacts/${short_model_name}/${short_dataset_name}/pruned_models/${pruned_model_dir_name}"
 
-echo "evaluating model: ${model_dir}"
-bash experiments/eval.sh \
-    $model_dir \
-    $seed\
-    $port \
-    $server_log_file_name \
-    ${run_lm_eval} \
-    ${run_evalplus} \
-    ${run_livecodebench} \
-    ${run_math} \
-    ${run_wildbench}
-echo "Finished evaluating model: ${pruned_model}"
 
 # echo "Removing safetensor files from ${model_dir}"
 # rm ${model_dir}/*.safetensors
