@@ -120,7 +120,7 @@ def record_activations(
             )
             raw_ds = c4_single_file_dataset
         else:
-            raw_ds = load_dataset(ds_args.dataset_name, split=ds_args.split)
+            raw_ds = load_dataset(ds_args.dataset_name, split=ds_args.split).take(10)
     except Exception as e:
         raise RuntimeError(f"Failed to load dataset '{ds_args.dataset_name}': {e}")
 
