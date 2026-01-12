@@ -348,14 +348,6 @@ def main():
                 )
 
         logger.info("Pruning completed.")
-        from huggingface_hub import HfApi
-
-        api = HfApi(token=os.getenv('WRITE_HF_TOKEN'))
-        api.upload_large_folder(
-            repo_id=os.getenv('HF_UPLOAD_REPO'),
-            folder_path=pruned_model_dir,
-            repo_type="model",
-        )
 
         dump_args_to_yaml(
             pruned_model_dir,
@@ -366,6 +358,14 @@ def main():
             eval_args,
             prune_args,
             cluster_args,
+        )
+        from huggingface_hub import HfApi
+
+        api = HfApi(token=os.getenv('WRITE_HF_TOKEN'))
+        api.upload_large_folder(
+            repo_id=os.getenv('HF_UPLOAD_REPO'),
+            folder_path=pruned_model_dir,
+            repo_type="model",
         )
 
     # eval
