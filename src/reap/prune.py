@@ -266,13 +266,13 @@ def main():
 
     # get local patched model if req'd
     model_name = patched_model_map(model_args.model_name)
-    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=False)
     # load model
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
         device_map="auto",
         torch_dtype="auto",
-        trust_remote_code=True,
+        trust_remote_code=False,
     )
     # record activations or load previously recorded activations
     logger.info(
