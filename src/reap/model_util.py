@@ -77,7 +77,7 @@ MODEL_ATTRS = {
         "up_proj": "gate_up_proj",
         "down_proj": "down_proj",
         "experts": "experts",
-        "fused": True,
+        "fused": False,
         "router": "gate",
         "num_experts": "n_routed_experts",
         "num_experts_per_tok": "num_experts_per_tok",

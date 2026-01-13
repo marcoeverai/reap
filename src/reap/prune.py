@@ -1,4 +1,10 @@
 from __future__ import annotations
+import sys
+from reap.models import deepseek3
+
+sys.modules[
+    "transformers.models.deepseek_v3.modeling_deepseek_v3"
+] = ds3
 
 import os
 import time
@@ -37,6 +43,8 @@ from reap.cluster import (
 from reap.model_util import get_moe, assert_merge, MODEL_ATTRS, patched_model_map, get_super_expert_indices
 from reap.eval import run_evaluate
 import shutil
+
+
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -163,6 +171,14 @@ def prune(
                         :, retained_expert_indicies
                     ]
                 )
+            if model.__class__.__name__.lower() == 'deepseekv3forcausallm':
+                # transformers version >=4.54
+                # prune expert score correction bias too
+                moe.gate.e_score_correction_bias.data = (
+                    moe.gate.e_score_correction_bias.data[
+                         retained_expert_indicies
+                    ]
+                )
 
             # prune router
             router = getattr(moe, model_attrs["router"])
@@ -246,6 +262,7 @@ def main():
     reap_args, ds_args, obs_args, model_args, eval_args, prune_args, cluster_args = (
         parser.parse_args_into_dataclasses()
     )
+
     if prune_args.perserve_super_experts and prune_args.perserve_outliers:
         raise ValueError("Only one of perserve_super_experts or perserve_outliers can be set to True.")
     set_seed(reap_args.seed)
@@ -260,7 +277,6 @@ def main():
         device_map="auto",
         torch_dtype="auto",
         trust_remote_code=True,
-        local_files_only=True,
     )
     # record activations or load previously recorded activations
     logger.info(
