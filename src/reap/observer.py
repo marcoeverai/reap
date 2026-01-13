@@ -595,8 +595,8 @@ class DeepSeekMoEObserverHookConfig(MoETransformerObserverConfig):
 @dataclass
 class DeepSeekV3MoEObserverHookConfig(MoETransformerObserverConfig):
     module_class_name_to_hook_regex: Optional[str] = "DeepseekV3MoE"
-    num_experts_attr_name: str = "n_routed_experts"
-    top_k_attr_name: str = "top_k"
+    num_experts_attr_name: str = "config.n_routed_experts"
+    top_k_attr_name: str = "gate.top_k"
     fused_experts: bool = False
     renormalize_router_weights: bool = True
 
