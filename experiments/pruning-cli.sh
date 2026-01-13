@@ -19,7 +19,7 @@ run_math=${10:-false}
 run_wildbench=${11:-false}
 singleton_super_experts=${12:-"false"}
 singleton_outlier_experts=${13:-"false"}
-num_samples=4096
+num_samples=8192
 output_file_name="observations_${num_samples}_cosine-seed_${seed}.pt"
 
 
