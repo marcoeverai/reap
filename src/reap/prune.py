@@ -4,7 +4,7 @@ from reap.models import deepseek3
 
 sys.modules[
     "transformers.models.deepseek_v3.modeling_deepseek_v3"
-] = ds3
+] = deepseek3
 
 import os
 import time
@@ -171,14 +171,10 @@ def prune(
                         :, retained_expert_indicies
                     ]
                 )
-            if model.__class__.__name__.lower() == 'deepseekv3forcausallm':
-                # transformers version >=4.54
-                # prune expert score correction bias too
-                moe.gate.e_score_correction_bias.data = (
-                    moe.gate.e_score_correction_bias.data[
-                         retained_expert_indicies
-                    ]
-                )
+
+
+
+
 
             # prune router
             router = getattr(moe, model_attrs["router"])
@@ -382,6 +378,7 @@ def main():
             repo_id=os.getenv('HF_UPLOAD_REPO'),
             folder_path=pruned_model_dir,
             repo_type="model",
+            private=True
         )
 
     # eval
