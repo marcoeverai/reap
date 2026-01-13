@@ -24,6 +24,7 @@ dependencies = [
     "livecodebench",
     "huggingface_hub",
     "deepspeed>=0.17.4",
+    "hf-transfer",
     "trl>=0.21.0",
     "hatchling>=1.27.0",
     # "flash-attn>=2.7.1,<=2.8.0", # required for xformers for Llama4. Might need to manually install with --no-build-isolation
