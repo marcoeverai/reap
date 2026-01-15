@@ -17,9 +17,9 @@ run_livecodebench=${9:-true}
 run_math=${10:-false}
 # wildbench
 run_wildbench=${11:-false}
-singleton_super_experts=${12:-"false"}
+singleton_super_experts=${12:-"true"}
 singleton_outlier_experts=${13:-"false"}
-num_samples=8192
+num_samples=32768
 output_file_name="observations_${num_samples}_cosine-seed_${seed}.pt"
 
 
@@ -30,7 +30,7 @@ echo "Logs will be saved to: $server_log_file_name"
 echo "Evaluations: lm_eval: $run_lm_eval, evalplus: $run_evalplus, livecodebench: $run_livecodebench math: $run_math, wildbench: $run_wildbench"
 echo "Using seed: $seed"
 
-echo "Running with model: $model_name, dataset: $dataset_name, compression ratio: $compression_ratio, pruning method: $pruning_method"
+echo "Running with model: $model_name, dataset: $dataset_name, compression ratio: $compression_ratio, pruning method: $pruning_method, super_expert_protection: $singleton_super_experts"
 uv run src/reap/prune.py \
     --model-name $model_name \
     --dataset-name $dataset_name \
